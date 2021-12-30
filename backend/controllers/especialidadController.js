@@ -5,23 +5,13 @@ const especialidad = require('../models/especialidad.js')
 
 function guardar(req, res){
     let especialidad = Especialidad()
-    especialidad.nombre = req.body.nombre
-    especialidad.save((err, especialidastore) => {
+    especialidad.nombre_especialidad = req.body.nombre_especialidad
+    especialidad.save((err, especialidadstore) => {
         if (err){
             res.status(500).send(`Error base de datos > ${err}`)
         }
-        res.status(200).send({especialidad: especialidastore})
+        res.status(200).send({especialidad: especialidadstore})
     })    
-}
-
-function buscar(req, res){
-    let nombrereq = req.query.nombre
-    Especialidad.find({nombre: {$regex: '.*' + nombrereq + '.*'}}, (err, especialidad) => {
-        if (!especialidad){
-            return res.status(404).send({msg: `Error, la especialidad no existe`})
-        }
-        res.status(200).send({especialidad})
-    }).limit
 }
 
 function buscarporID(req, res){

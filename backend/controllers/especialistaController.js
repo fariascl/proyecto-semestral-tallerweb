@@ -5,7 +5,7 @@ var Especialista = require('../models/especialista.js');
 function guardar(req, res){
     let especialista = Especialista()
     especialista.nombre = req.body.nombre
-    especialista.especialidad = req.body.idEspecialista
+    especialista.especialidad = req.body.idEspecialidad
     especialista.save((err, especialistastore) => {
         res.status(200).send({especialistaInsertado: especialistastore})
     })

@@ -2,7 +2,6 @@
 
 var express = require('express');
 var especialidadController = require('../controllers/especialidadController');
-const especialidad = require('../models/especialidad');
 
 var api = express.Router();
 

@@ -7,7 +7,10 @@ app.use(cors())
 app.options('*', cors());
 
 var especialista_route = require('./routes/especialistaRoute');
-var especialidad_route = require('./routes/especialistaRoute');
+var especialidad_route = require('./routes/especialidadRoute');
+var agendamiento_route = require('./routes/agendamientoRoute');
+var disponilidad_route = require('./routes/disponibilidadRoute');
+var usuario_route = require('./routes/usuarioRoute');
 
 const mongoose = require('mongoose');
 
@@ -17,6 +20,9 @@ app.use(bodyParser.json())
 
 app.use('/api', especialista_route);
 app.use('/api', especialidad_route);
+app.use('/api', usuario_route);
+app.use('/api', agendamiento_route);
+app.use('/api', disponilidad_route);
 
 const options = {
     useNewUrlParser: true,

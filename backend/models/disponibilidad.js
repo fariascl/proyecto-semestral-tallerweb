@@ -10,7 +10,7 @@ const disponibilidadSchema = Schema (
         fecha: { 
             type: Date
         },
-        horario: {
+        hora: {
             type: String
         },
         disponible: {

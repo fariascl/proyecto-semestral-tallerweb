@@ -7,4 +7,4 @@ const especialidadSchema = Schema (
     }
 )
 
-module.exports = mongoose.model('especialidad', especialidadSchema)
+module.exports = mongoose.model('especialidades', especialidadSchema)
