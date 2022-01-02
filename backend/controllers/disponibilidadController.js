@@ -31,6 +31,19 @@ function buscarporID(req, res){
     })
 }
 
+function buscarporEspecialista(req, res){
+    let idEspecialista = req.params.idEspecialista
+    Disponibilidad.find(idEspecialista, (err, disponibilidad) => {
+        if (err){
+            return res.status(500).send({msg: 'Error al realizar la peticion'})
+        }
+        if (!disponibilidad){
+            return res.status(404).send({msg: 'error, la disponibilidad no existe'})
+        }
+        res.status(200).send({disponibilidad})
+    })
+}
+
 function todos(req, res){
     Disponibilidad.find({}, (err, disponibilidad) => {
         if (err){
@@ -46,5 +59,6 @@ function todos(req, res){
 module.exports = {
     guardar,
     buscarporID,
-    todos
+    todos,
+    buscarporEspecialista
 };

@@ -5,7 +5,8 @@ import { useState, useEffect } from 'react';
 import { createBrowserHistory } from 'history';
 import { BrowserRouter as Router, Switch, Route, Link, Navigate, Redirect } from "react-router-dom";
 import SignIn from './views/SignIn';
-import Menu from './views/Menu'
+import Menu from './views/Menu';
+import Agendamiento from './views/Agendamientos';
 
 const browserHistory = createBrowserHistory();
 
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route path="/menu">
           <Menu />
+        </Route>
+        <Route path="/agendar">
+          <Agendamiento />
         </Route>
 
 

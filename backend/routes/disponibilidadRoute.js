@@ -7,5 +7,6 @@ var api = express.Router();
 
 api.post('/disponibilidades', disponibilidadController.guardar);
 api.get('/disponibilidades', disponibilidadController.todos);
+api.get('/disponiblidades/:idEspecialista', disponibilidadController.buscarporEspecialista)
 
 module.exports = api;
