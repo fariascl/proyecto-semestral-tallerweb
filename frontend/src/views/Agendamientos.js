@@ -14,13 +14,14 @@ const Agendamiento = () => {
     const [especialidades, setEspecialidad] = useState([])
     const [idDisponibilidad, setDisponibilidad] = useState([])
     const [id_especialista, setId] = useState([])
+    const [id_especialidad, setIdEspecialidad] = useState("")
 
     const handleInputChangeEspecialidad = (event) => {
-        setEspecialidad(event.target.value)
+        alert(event.target.value)
+        setIdEspecialidad(event.target.value)
     }
-    const handleInputChangeEspecialista = (event) => {
-        setEspecialistas(event.target.value)
-    }
+    
+
     const handleInputChangeRut = (event) => {
         setRut(event.target.value)
     }
@@ -31,6 +32,7 @@ const Agendamiento = () => {
 
     useEffect(() => {
         getEspecialidad()
+        
     })
 
     async function getEspecialidad(){
@@ -43,6 +45,18 @@ const Agendamiento = () => {
             console.error(error)
         }
     }
+
+    async function getEspecialistasxEspecialidad(){
+        try {
+            const response = await axios.get(`/api/especialistas/${id_especialidad}`)
+            if (response.status = 200){
+                setEspecialistas(response.data.especialista)
+            }
+        } catch (error){
+            console.log(error)
+        }
+    }
+
 
     async function getDisponibilidad(){
         try {
@@ -110,9 +124,10 @@ const Agendamiento = () => {
                 margin="normal"
                 labelId="demo-customized-select-label"
                 id="demo-customized-select"
-                value="1"
+                onChange={handleInputChangeEspecialidad}
                 fullWidth
                 >
+                    <MenuItem>Seleccione una especialidad</MenuItem>
                     {especialidades.map((especialidad) => (
                         <MenuItem value={especialidad._id}>{especialidad.nombre_especialidad}</MenuItem>
                     ))}
@@ -125,15 +140,13 @@ const Agendamiento = () => {
                 margin="normal"
                 labelId="demo-customized-select-label"
                 id="demo-customized-select"
-                value="1"
                 fullWidth
                 >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                    <MenuItem>Seleccione especialista</MenuItem>
+                    { especialistas.map((especialista) => (
+                        <MenuItem value={especialista._id}>{especialista.nombre}</MenuItem>
+                    ))}
+                    
                 </Select>
             </FormControl>
             </form>
