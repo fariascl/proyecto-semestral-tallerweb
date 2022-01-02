@@ -32,14 +32,14 @@ const Agendamiento = () => {
 
     useEffect(() => {
         getEspecialidad()
-        
-    })
+        getEspecialistasxEspecialidad()
+    }, [])
 
     async function getEspecialidad(){
         try {
             const response = await axios.get("/api/especialidades")
             if (response.status == 200){
-                setEspecialidad(response.data.especialidad) // Setea el json de especialidades
+                setEspecialidad(response.data.especialidad) // Setea el json de especialidades    
             }
         } catch (error){
             console.error(error)
@@ -48,9 +48,10 @@ const Agendamiento = () => {
 
     async function getEspecialistasxEspecialidad(){
         try {
-            const response = await axios.get(`/api/especialistas/${id_especialidad}`)
+            const response = await axios.get(`/api/especialistas`)
             if (response.status = 200){
-                setEspecialistas(response.data.especialista)
+                //alert(response.data.especialistaconespecialidad)
+                setEspecialistas(response.data.especialistaconespecialidad)
             }
         } catch (error){
             console.log(error)
@@ -123,11 +124,9 @@ const Agendamiento = () => {
                 <Select
                 margin="normal"
                 labelId="demo-customized-select-label"
-                id="demo-customized-select"
-                onChange={handleInputChangeEspecialidad}
                 fullWidth
                 >
-                    <MenuItem>Seleccione una especialidad</MenuItem>
+                    
                     {especialidades.map((especialidad) => (
                         <MenuItem value={especialidad._id}>{especialidad.nombre_especialidad}</MenuItem>
                     ))}
@@ -143,8 +142,9 @@ const Agendamiento = () => {
                 fullWidth
                 >
                     <MenuItem>Seleccione especialista</MenuItem>
-                    { especialistas.map((especialista) => (
+                    {especialistas.map((especialista) => (
                         <MenuItem value={especialista._id}>{especialista.nombre}</MenuItem>
+
                     ))}
                     
                 </Select>
