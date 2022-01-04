@@ -51,6 +51,7 @@ const Agendamiento = () => {
             const response = await axios.get(`/api/especialistas`)
             if (response.status = 200){
                 //alert(response.data.especialistaconespecialidad)
+                console.log(response.data.especialistaconespecialidad)
                 setEspecialistas(response.data.especialistaconespecialidad)
             }
         } catch (error){
@@ -125,6 +126,7 @@ const Agendamiento = () => {
                 margin="normal"
                 labelId="demo-customized-select-label"
                 fullWidth
+                onChange={handleInputChangeEspecialidad} 
                 >
                     
                     {especialidades.map((especialidad) => (
@@ -142,7 +144,11 @@ const Agendamiento = () => {
                 fullWidth
                 >
                     <MenuItem>Seleccione especialista</MenuItem>
-                    {especialistas.map((especialista) => (
+                    {
+                    id_especialidad ? especialistas.filter(especialista => especialista.especialidad._id == id_especialidad).map(especialistaFiltered => (
+                        <MenuItem value={especialistaFiltered._id}>{especialistaFiltered.nombre}</MenuItem>
+
+                    )): especialistas.map((especialista) => (
                         <MenuItem value={especialista._id}>{especialista.nombre}</MenuItem>
 
                     ))}
