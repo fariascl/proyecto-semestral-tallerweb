@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
 const Agendamiento = () => {
@@ -103,6 +104,9 @@ const Agendamiento = () => {
           marginTop: theme.spacing(1),
       
         },
+        margin: {
+            margin: theme.spacing(1),
+        },
       }));
       const classes = useStyles()
     return (
@@ -155,6 +159,9 @@ const Agendamiento = () => {
                     
                 </Select>
             </FormControl>
+            <Button size="large" variant="contained" color="primary" className={classes.margin}>
+                Avanzar
+            </Button>
             </form>
         </div>
       )
