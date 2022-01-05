@@ -31,18 +31,6 @@ function buscarporID(req, res){
     })
 }
 
-function buscarporEspecialista(req, res){
-    let idEspecialista = req.params.idEspecialista
-    Disponibilidad.find(idEspecialista, (err, disponibilidad) => {
-        if (err){
-            return res.status(500).send({msg: 'Error al realizar la peticion'})
-        }
-        if (!disponibilidad){
-            return res.status(404).send({msg: 'error, la disponibilidad no existe'})
-        }
-        res.status(200).send({disponibilidad})
-    })
-}
 
 function todos(req, res){
     Disponibilidad.find({}, (err, disponibilidad) => {
@@ -53,6 +41,22 @@ function todos(req, res){
             return res.status(404).send({msg: 'error, la disponibilidad no existe'})
         }
         res.status(200).send({disponibilidad})
+    })
+}
+
+function buscarporEspecialista(req, res){
+    let idEspecialista = req.params.idEspecialista
+    Disponibilidad.find({"especialista": idEspecialista})
+    .populate('especialista')
+    .exec((err, disponibilidad) => {
+        if (err){
+            return res.status(500).send({msg: "Error al realizar la consulta"})
+        }
+        if (!disponibilidad){
+            return res.status(404).send({msg: "error, la disponibilidad no existe"})
+        }
+        res.status(200).send({disponibilidad})
+        
     })
 }
 

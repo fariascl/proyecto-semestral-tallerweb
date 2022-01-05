@@ -30,6 +30,8 @@ function buscarporID(req, res){
     })
 }
 
+
+
 function todos(req, res){
     Agendamiento.find({}, (err, agendamiento) => {
         if (err){

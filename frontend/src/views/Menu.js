@@ -56,10 +56,6 @@ export default function Menu() {
 
     useEffect(() => {
         const token = localStorage.getItem('TOKEN_APP_TALLER');
-        //const activo = localStorage.getItem('ESTA_ACTIVO'); // revisa si el campo esta activo
-        //alert(token)
-        //alert(activo)
-        //console.log(activo)
         
         if (!token) {
             window.location = '/';

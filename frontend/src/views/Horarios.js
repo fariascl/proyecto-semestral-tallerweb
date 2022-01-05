@@ -5,228 +5,89 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import TextField from '@material-ui/core/TextField';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
-
-export default function NativeSelects() {
+const Horarios = () => {
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    formControl: {
+      margin: theme.spacing(5),
+      minWidth: 120,
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+  }));
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    age: '',
-    name: 'hai',
-  });
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
-  };
-
+  const horas = ['08:00','08:15', '08:30', '08:45', '09:00', '09:15', '09:30', '09:45', '10:00', '10:15', '10:30', '10:45', '11:00', '11:15', 
+                 '11:30', '11:45', '12:00', '12:15', '12:30', '12:45', '13:00', '13:15', '13:30', '13:45', '14:00', '14:15', '14:30', '14:45', '15:00', 
+                 '15:15', '15:30', '15:45', '16:00', '16:15', '16:30', '16:45', '17:00', '17:15', '17:30', '17:45', '18:00', '18:15', '18:30', '18:45',
+                 '19:00', '19:15', '19:30', '19:45', '20:00', '20:15', '20:30', '20:45', '21:00']
+   
   return (
-    <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="age-native-simple">Age</InputLabel>
-        <Select
-          native
-          value={state.age}
-          onChange={handleChange}
-          inputProps={{
-            name: 'age',
-            id: 'age-native-simple',
+    
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+        <Grid item xs={3}>
+          <FormControl className={classes.formControl}>
+          <InputLabel id="especialista-select">Age</InputLabel>
+          <Select
+          margin="normal"
+          required
+          fullWidth
+          labelId='especialista-select'
+          >
+            <option value={10}>Ten</option>
+            <option value={20}>Twenty</option>
+            <option value={30}>Thirty</option>
+          </Select>
+        </FormControl>
+  
+        <TextField
+          id="date"
+          label="Birthday"
+          type="date"
+          defaultValue="2017-05-24"
+          className={classes.textField}
+          InputLabelProps={{
+            shrink: true,
           }}
-        >
-          <option aria-label="None" value="" />
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </Select>
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="age-native-helper">Age</InputLabel>
-        <NativeSelect
-          value={state.age}
-          onChange={handleChange}
-          inputProps={{
-            name: 'age',
-            id: 'age-native-helper',
-          }}
-        >
-          <option aria-label="None" value="" />
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </NativeSelect>
-        <FormHelperText>Some important helper text</FormHelperText>
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <NativeSelect
-          value={state.age}
-          onChange={handleChange}
-          name="age"
-          className={classes.selectEmpty}
-          inputProps={{ 'aria-label': 'age' }}
-        >
-          <option value="">None</option>
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </NativeSelect>
-        <FormHelperText>With visually hidden label</FormHelperText>
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <InputLabel shrink htmlFor="age-native-label-placeholder">
-          Age
-        </InputLabel>
-        <NativeSelect
-          value={state.age}
-          onChange={handleChange}
-          inputProps={{
-            name: 'age',
-            id: 'age-native-label-placeholder',
-          }}
-        >
-          <option value="">None</option>
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </NativeSelect>
-        <FormHelperText>Label + placeholder</FormHelperText>
-      </FormControl>
-      <FormControl className={classes.formControl} disabled>
-        <InputLabel htmlFor="name-native-disabled">Name</InputLabel>
-        <NativeSelect
-          value={state.name}
-          onChange={handleChange}
-          inputProps={{
-            name: 'name',
-            id: 'name-native-disabled',
-          }}
-        >
-          <option value="">None</option>
-          <optgroup label="Author">
-            <option value="hai">Hai</option>
-          </optgroup>
-          <optgroup label="Contributors">
-            <option value="olivier">Olivier</option>
-            <option value="kevin">Kevin</option>
-          </optgroup>
-        </NativeSelect>
-        <FormHelperText>Disabled</FormHelperText>
-      </FormControl>
-      <FormControl className={classes.formControl} error>
-        <InputLabel htmlFor="name-native-error">Name</InputLabel>
-        <NativeSelect
-          value={state.name}
-          onChange={handleChange}
-          name="name"
-          inputProps={{
-            id: 'name-native-error',
-          }}
-        >
-          <optgroup label="Author">
-            <option value="hai">Hai</option>
-          </optgroup>
-          <optgroup label="Contributors">
-            <option value="olivier">Olivier</option>
-            <option value="kevin">Kevin</option>
-          </optgroup>
-        </NativeSelect>
-        <FormHelperText>Error</FormHelperText>
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="uncontrolled-native">Name</InputLabel>
-        <NativeSelect
-          defaultValue={30}
-          inputProps={{
-            name: 'name',
-            id: 'uncontrolled-native',
-          }}
-        >
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </NativeSelect>
-        <FormHelperText>Uncontrolled</FormHelperText>
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <NativeSelect
-          className={classes.selectEmpty}
-          value={state.age}
-          name="age"
-          onChange={handleChange}
-          inputProps={{ 'aria-label': 'age' }}
-        >
-          <option value="" disabled>
-            Placeholder
-          </option>
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </NativeSelect>
-        <FormHelperText>Placeholder</FormHelperText>
-      </FormControl>
-      <FormControl required className={classes.formControl}>
-        <InputLabel htmlFor="age-native-required">Age</InputLabel>
-        <Select
-          native
-          value={state.age}
-          onChange={handleChange}
-          name="age"
-          inputProps={{
-            id: 'age-native-required',
-          }}
-        >
-          <option aria-label="None" value="" />
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </Select>
-        <FormHelperText>Required</FormHelperText>
-      </FormControl>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel htmlFor="outlined-age-native-simple">Age</InputLabel>
-        <Select
-          native
-          value={state.age}
-          onChange={handleChange}
-          label="Age"
-          inputProps={{
-            name: 'age',
-            id: 'outlined-age-native-simple',
-          }}
-        >
-          <option aria-label="None" value="" />
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </Select>
-      </FormControl>
-      <FormControl variant="filled" className={classes.formControl}>
-        <InputLabel htmlFor="filled-age-native-simple">Age</InputLabel>
-        <Select
-          native
-          value={state.age}
-          onChange={handleChange}
-          inputProps={{
-            name: 'age',
-            id: 'filled-age-native-simple',
-          }}
-        >
-          <option aria-label="None" value="" />
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </Select>
-      </FormControl>
-    </div>
-  );
+        />
+        </Grid>
+        <FormControlLabel
+          control={<Checkbox color='primary' />}
+          label="Habilitar todos"
+          />
+        <Grid item xs={4}>
+        
+        { horas.map((hora) => (
+          <FormControlLabel
+          control={<Checkbox color='primary' />}
+          label={hora}
+          />
+        ))}
+        </Grid>
+        </Grid>
+
+
+        
+          
+          
+  
+        
+      </div>
+      
+    );
+
+ 
+
 }
+export default Horarios
+
