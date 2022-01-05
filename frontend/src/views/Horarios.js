@@ -15,13 +15,29 @@ const Horarios = () => {
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
+      
     },
     formControl: {
       margin: theme.spacing(5),
-      minWidth: 120,
+      minWidth: 400,
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
+    },
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit
+    },
+    grillaCentrada: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    tituloh1: {
+      textAlign: 'center',
+    },
+    grillaHorarios: {
+      display: 'inline-block',
     },
   }));
   const classes = useStyles();
@@ -37,7 +53,7 @@ const Horarios = () => {
         <Grid container spacing={3}>
         <Grid item xs={3}>
           <FormControl className={classes.formControl}>
-          <InputLabel id="especialista-select">Age</InputLabel>
+          <InputLabel id="especialista-select">Especialista</InputLabel>
           <Select
           margin="normal"
           required
@@ -49,7 +65,7 @@ const Horarios = () => {
             <option value={30}>Thirty</option>
           </Select>
         </FormControl>
-  
+        <FormControl className={classes.formControl}>
         <TextField
           id="date"
           label="Birthday"
@@ -60,17 +76,30 @@ const Horarios = () => {
             shrink: true,
           }}
         />
+        </FormControl>
         </Grid>
+        <Grid item xs={2}>
+
+        </Grid>
+
+        <Grid item xs={1} className={classes.grillaCentrada}>
         <FormControlLabel
           control={<Checkbox color='primary' />}
           label="Habilitar todos"
           />
-        <Grid item xs={4}>
+        </Grid>
+
+
+          <Grid item xs={1}>
+        </Grid>
         
+        <Grid item xs={4}>
+        <h3 className={classes.tituloh1}>Horarios</h3>
         { horas.map((hora) => (
           <FormControlLabel
           control={<Checkbox color='primary' />}
           label={hora}
+          padding
           />
         ))}
         </Grid>
