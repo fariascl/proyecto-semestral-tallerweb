@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -10,8 +10,85 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import axios from 'axios';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import { KeyboardDatePicker } from "@material-ui/pickers";
 
 const Horarios = () => {
+
+  const [especialistas, setEspecialistas] = useState([])
+  const [todasHoras, setTodasHoras] = useState("")
+
+  const [idEspecialista, setEspecialista] = useState("")
+  const [fecha, setFecha] = useState()
+  const [hora, setHora] = useState()
+  const [disponible, setDisponible] = useState()
+
+  const handleEspecialista = (event) => {
+    setEspecialista(event.target.value)
+  }
+
+  const handleFecha = (event) => {
+    setFecha(event.target.value)
+  }
+
+  const handleHora = (event) => {
+    setHora(event.target.value)
+  }
+
+  const handleDisponible = (event) => {
+    setDisponible(event.target.value)
+  }
+  
+
+  const handleCheckBoxCheckAll= (event) => {
+    //alert(event.target.value)
+    alert(event.target.checked)
+    setTodasHoras(event.target.checked)
+}
+  var today = new Date();
+
+  const date = today.getFullYear() + '-' + '0' + (today.getMonth() + 1) + '-' + '0' +(today.getDate()); // Averiguar como solucionar esto, sino cambiar
+  
+
+  async function getEspecialistasxEspecialidad(){
+    try {
+        const response = await axios.get(`/api/especialistas`)
+        if (response.status = 200){
+            //alert(response.data.especialistaconespecialidad)
+            console.log(response.data.especialistaconespecialidad)
+            setEspecialistas(response.data.especialistaconespecialidad)
+        }
+    } catch (error){
+        console.log(error)
+    }
+  }
+
+  function guardarDisponibilidad(){
+    axios.post('/api/disponibilidades', {
+      idEspecialista: idEspecialista,
+      fecha: fecha,
+      hora: hora,
+      disponible: disponible
+    })
+    .then (function (response){
+      if (response.status == 200){
+        alert("Disponibilidades guardadas exitosamente")
+      }
+      else {
+        alert("Error al guardar las disponibilidades")
+      }
+    })
+    .catch (function (error){
+      console.log(error);
+    });
+  }
+
+  useEffect(() => {
+    getEspecialistasxEspecialidad()
+  }, [])
+
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -48,6 +125,7 @@ const Horarios = () => {
                  '19:00', '19:15', '19:30', '19:45', '20:00', '20:15', '20:30', '20:45', '21:00']
    
   return (
+    <Fragment>
     
       <div className={classes.root}>
         <Grid container spacing={3}>
@@ -60,17 +138,17 @@ const Horarios = () => {
           fullWidth
           labelId='especialista-select'
           >
-            <option value={10}>Ten</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
+            {especialistas.map((especialista) => (
+                        <MenuItem value={especialista._id}>{especialista.nombre}</MenuItem>
+            ))}
           </Select>
         </FormControl>
         <FormControl className={classes.formControl}>
         <TextField
           id="date"
-          label="Birthday"
+          label="Fecha"
           type="date"
-          defaultValue="2017-05-24"
+          defaultValue={date} //"2017-05-24"
           className={classes.textField}
           InputLabelProps={{
             shrink: true,
@@ -86,6 +164,7 @@ const Horarios = () => {
         <FormControlLabel
           control={<Checkbox color='primary' />}
           label="Habilitar todos"
+          onChange={handleCheckBoxCheckAll}
           />
         </Grid>
 
@@ -99,9 +178,14 @@ const Horarios = () => {
           <FormControlLabel
           control={<Checkbox color='primary' />}
           label={hora}
+          
           padding
+          checked={ todasHoras ? true : false }
           />
         ))}
+        <Button size="large" variant="contained" color="primary" className={classes.margin}>
+                Confirmar
+            </Button>
         </Grid>
         </Grid>
 
@@ -112,7 +196,7 @@ const Horarios = () => {
   
         
       </div>
-      
+      </Fragment>
     );
 
  
