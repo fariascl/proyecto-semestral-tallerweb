@@ -33,7 +33,7 @@ function buscarporID(req, res){
 
 function todos(req, res){
     Disponibilidad.find()
-    .populate('disponibilidades').exec((err, disponibilidadconespecialista) => {
+    .populate('especialista').exec((err, disponibilidadconespecialista) => {
         res.status(200).send({disponibilidadconespecialista})
     })
 }

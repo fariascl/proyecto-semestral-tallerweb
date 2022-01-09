@@ -1,7 +1,7 @@
 'use strict'
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const disponibilidadSchema = Schema (
+const disponibilidadesSchema = Schema (
     {
         fecha: Date,
         hora: String,
@@ -10,4 +10,4 @@ const disponibilidadSchema = Schema (
     }
 )
 
-module.exports = mongoose.model('disponibilidad', disponibilidadSchema)
+module.exports = mongoose.model('disponibilidades', disponibilidadesSchema)
