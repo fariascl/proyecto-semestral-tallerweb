@@ -1,12 +1,11 @@
 'use strict'
 var Disponibilidad = require('../models/disponibilidad.js')
 
-const disponibilidad = require('../models/disponibilidad.js')
 
 function guardar(req, res){
     let disponibilidad = Disponibilidad()
     //disponibilidad.nombre = req.body.nombre
-    disponibilidad.idEspecialidad = req.body.idEspecialidad
+    disponibilidad.especialista = req.body.idEspecialista
     disponibilidad.fecha = req.body.fecha
     disponibilidad.hora = req.body.hora
     disponibilidad.disponible = req.body.disponible
@@ -33,14 +32,9 @@ function buscarporID(req, res){
 
 
 function todos(req, res){
-    Disponibilidad.find({}, (err, disponibilidad) => {
-        if (err){
-            return res.status(500).send({msg: 'Error al realizar la peticion'})
-        }
-        if (!disponibilidad){
-            return res.status(404).send({msg: 'error, la disponibilidad no existe'})
-        }
-        res.status(200).send({disponibilidad})
+    Disponibilidad.find()
+    .populate('disponibilidades').exec((err, disponibilidadconespecialista) => {
+        res.status(200).send({disponibilidadconespecialista})
     })
 }
 

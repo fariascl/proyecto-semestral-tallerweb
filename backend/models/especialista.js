@@ -8,4 +8,4 @@ const especialistaSchema = Schema (
     }
 )
 
-module.exports = mongoose.model('especialistas', especialistaSchema)
+module.exports = mongoose.model('especialista', especialistaSchema)

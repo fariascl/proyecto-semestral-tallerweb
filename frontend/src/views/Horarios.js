@@ -18,7 +18,7 @@ import { KeyboardDatePicker } from "@material-ui/pickers";
 const Horarios = () => {
 
   const [especialistas, setEspecialistas] = useState([])
-  const [todasHoras, setTodasHoras] = useState("")
+  const [todasHoras, setTodasHoras] = useState()
 
   const [idEspecialista, setEspecialista] = useState("")
   const [fecha, setFecha] = useState()
@@ -26,6 +26,7 @@ const Horarios = () => {
   const [disponible, setDisponible] = useState()
 
   const handleEspecialista = (event) => {
+    alert(event.target.value)
     setEspecialista(event.target.value)
   }
 
@@ -137,6 +138,8 @@ const Horarios = () => {
           required
           fullWidth
           labelId='especialista-select'
+          id="especialista"
+          onChange={handleEspecialista}
           >
             {especialistas.map((especialista) => (
                         <MenuItem value={especialista._id}>{especialista.nombre}</MenuItem>
@@ -148,6 +151,7 @@ const Horarios = () => {
           id="date"
           label="Fecha"
           type="date"
+          onChange={handleFecha}
           defaultValue={date} //"2017-05-24"
           className={classes.textField}
           InputLabelProps={{
@@ -178,12 +182,13 @@ const Horarios = () => {
           <FormControlLabel
           control={<Checkbox color='primary' />}
           label={hora}
-          
+          value={hora}
+          onChange={handleHora}
           padding
-          checked={ todasHoras ? true : false }
+          checked={ todasHoras === true ? true : undefined }
           />
         ))}
-        <Button size="large" variant="contained" color="primary" className={classes.margin}>
+        <Button size="large" variant="contained" color="primary" className={classes.margin} onClick={guardarDisponibilidad}>
                 Confirmar
             </Button>
         </Grid>

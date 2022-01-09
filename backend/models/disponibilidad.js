@@ -3,20 +3,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const disponibilidadSchema = Schema (
     {
-        idEspecialista: {
-            type: Schema.ObjectId, 
-            ref: "especialista"
-        },
-        fecha: { 
-            type: Date
-        },
-        hora: {
-            type: String
-        },
-        disponible: {
-            type: Boolean
-        }
+        fecha: Date,
+        hora: String,
+        disponible: Boolean,
+        especialista: { type: Schema.ObjectId, ref: "especialista", required: true}
     }
 )
 
-module.exports = mongoose.model('disponibilidad', disponibilidadSchema);
+module.exports = mongoose.model('disponibilidad', disponibilidadSchema)
