@@ -23,7 +23,7 @@ const Horarios = () => {
   const [idEspecialista, setEspecialista] = useState("")
   const [fecha, setFecha] = useState()
   const [hora, setHora] = useState()
-  const [disponible, setDisponible] = useState()
+  const [disponible, setDisponible] = useState(false)
 
   const handleEspecialista = (event) => {
     alert(event.target.value)
@@ -35,11 +35,12 @@ const Horarios = () => {
   }
 
   const handleHora = (event) => {
+    setDisponible(event.target.checked)
     setHora(event.target.value)
   }
 
   const handleDisponible = (event) => {
-    setDisponible(event.target.value)
+    setDisponible(event.target.checked)
   }
   
 
@@ -185,7 +186,8 @@ const Horarios = () => {
           value={hora}
           onChange={handleHora}
           padding
-          checked={ todasHoras === true ? true : undefined }
+          
+          
           />
         ))}
         <Button size="large" variant="contained" color="primary" className={classes.margin} onClick={guardarDisponibilidad}>
@@ -208,4 +210,3 @@ const Horarios = () => {
 
 }
 export default Horarios
-

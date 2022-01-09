@@ -7,6 +7,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import { validateRut } from 'rutlib';
 
 const Agendamiento = () => {
        
@@ -159,7 +160,7 @@ const Agendamiento = () => {
                     
                 </Select>
             </FormControl>
-            <Button size="large" variant="contained" color="primary" className={classes.margin}>
+            <Button size="large" variant="contained" color="primary" className={classes.margin} >
                 Avanzar
             </Button>
             </form>
