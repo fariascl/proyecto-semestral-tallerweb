@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link, Navigate, Redirect } from
 import SignIn from './views/SignIn';
 import Menu from './views/Menu';
 import Agendamiento from './views/Agendamientos';
+import AgendamientoMuestraHorarios from './views/AgendamientoMuestraHorarios';
 
 const browserHistory = createBrowserHistory();
 
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route path="/agendar">
           <Agendamiento />
+        </Route>
+        <Route path="/horarios:idEspecialista">
+          <AgendamientoMuestraHorarios />
         </Route>
 
 
