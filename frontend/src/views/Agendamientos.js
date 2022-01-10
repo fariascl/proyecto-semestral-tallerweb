@@ -17,6 +17,7 @@ const Agendamiento = () => {
     const [idDisponibilidad, setDisponibilidad] = useState([])
     const [id_especialista, setId] = useState([])
     const [id_especialidad, setIdEspecialidad] = useState("")
+    
 
     const handleInputChangeEspecialidad = (event) => {
         alert(event.target.value)
@@ -28,8 +29,21 @@ const Agendamiento = () => {
         setRut(event.target.value)
     }
 
+
+
     const enviarDatos = () => {
-        guardarAgendamiento();
+
+        if (validateRut(rut) === false){
+            alert("El rut ingresado está erroneo, inténtelo nuevamente");
+        }
+        else {
+            //getDisponibilidad();
+            //guardarAgendamiento();
+            alert("El rut bueno");
+        }
+
+
+        
     }
 
     useEffect(() => {
@@ -47,6 +61,7 @@ const Agendamiento = () => {
             console.error(error)
         }
     }
+
 
     async function getEspecialistasxEspecialidad(){
         try {
@@ -160,7 +175,7 @@ const Agendamiento = () => {
                     
                 </Select>
             </FormControl>
-            <Button size="large" variant="contained" color="primary" className={classes.margin} >
+            <Button size="large" variant="contained" color="primary" className={classes.margin} onClick={enviarDatos} >
                 Avanzar
             </Button>
             </form>
